@@ -23,17 +23,19 @@ cur_label.grid_remove()
 comp_label = ctk.CTkLabel(window, text="", width=25, height=15)
 comp_label.grid_remove()
 
+def comp_display(color):
+    comp_label.configure(fg_color=color)
+    comp_label.place(x=315, y=510)
+    cur_label.configure(fg_color=colorpicker.get())
+    cur_label.place(x=290, y=510)
+
 def combobox(choice):
     print("combobox dropdown clicked:", choice)
     hue, sat, val = conversion()
     if choice == 'Complementary':
         comp_color = complementary(hue, sat, val)
-        comp_label.configure(fg_color=comp_color)
-        comp_label.place(x=315, y=510)
-        cur_label.configure(fg_color=colorpicker.get())
-        cur_label.place(x=290, y=510)
-        print(f"This is the complementary color: {comp_color}")
-        
+        comp_display(comp_color)
+    
     elif choice == 'Monochromatic':
         pass
     elif choice == 'Analogous':

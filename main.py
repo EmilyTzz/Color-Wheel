@@ -3,16 +3,16 @@ from CTkColorPicker import *
 import colorsys
 
 window = ctk.CTk()
-window.geometry("570x580")
+window.geometry("600x680")
 window.title("Color Picker")
 
 options = ['Complementary', 'Monochromatic', 'Analogous', 'Triadic', 'Tetradic']
 
 def hex_conversion(r, g, b):
-    h = f"{int(r * 255):02x}"
-    s = f"{int(g * 255):02x}"
-    v = f"{int(b * 255):02x}"
-    hex_color = f"#{h}{s}{v}"
+    rr = f"{int(r * 255):02x}"
+    gg = f"{int(g * 255):02x}"
+    bb = f"{int(b * 255):02x}"
+    hex_color = f"#{rr}{gg}{bb}"
     return hex_color
 
 def complementary(comp_h, comp_s, comp_v):

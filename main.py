@@ -145,6 +145,8 @@ def combobox(choice):
         tetra_label1.place_forget()
         tetra_label2.place_forget()
         tetra_label3.place_forget()
+        comp_split_label1.place_forget()
+        comp_split_label2.place_forget()
         comp_color = complementary(hue, sat, val)
         comp_display(comp_color)
 
@@ -169,6 +171,8 @@ def combobox(choice):
         tetra_label1.place_forget()
         tetra_label2.place_forget()
         tetra_label3.place_forget()
+        comp_split_label1.place_forget()
+        comp_split_label2.place_forget()
         ana_color1, ana_color2 = analogous(hue, sat, val)
         ana_display(ana_color1, ana_color2)
 
@@ -180,6 +184,8 @@ def combobox(choice):
         tetra_label1.place_forget()
         tetra_label2.place_forget()
         tetra_label3.place_forget()
+        comp_split_label1.place_forget()
+        comp_split_label2.place_forget()
         tria_color1, tria_color2 = triadic(hue, sat, val)
         tria_display(tria_color1, tria_color2)
 
@@ -190,6 +196,8 @@ def combobox(choice):
         ana_label2.place_forget()
         tria_label1.place_forget()
         tria_label2.place_forget()
+        comp_split_label1.place_forget()
+        comp_split_label2.place_forget()
         tetra_color1, tetra_color2, tetra_color3 = tetradic(hue, sat, val)
         tetra_display(tetra_color1, tetra_color2, tetra_color3)
 

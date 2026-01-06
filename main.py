@@ -6,7 +6,7 @@ window = ctk.CTk()
 window.geometry("600x680")
 window.title("Color Picker")
 
-options = ['Complementary', 'Monochromatic', 'Analogous', 'Triadic', 'Tetradic']
+options = ['Complementary', 'Split Complementary', 'Analogous', 'Triadic', 'Tetradic']
 
 def hex_conversion(r, g, b):
     rr = f"{int(r * 255):02x}"
@@ -17,9 +17,18 @@ def hex_conversion(r, g, b):
 
 def complementary(comp_h, comp_s, comp_v):
     comp_h = ((comp_h + 180) % 360)/360
-    comp_r, comp_g, comp_b = colorsys.hsv_to_rgb(comp_h, comp_s, comp_v)
-    color = hex_conversion(comp_r, comp_g, comp_b)
+    r, g, b = colorsys.hsv_to_rgb(comp_h, comp_s, comp_v)
+    color = hex_conversion(r, g, b)
     return color
+
+def split_complementary(scomp_h, scomp_s, scomp_v):
+    scomp_h1 = ((scomp_h + 150) % 360)/360
+    scomp_h2 = ((scomp_h + 210) % 360)/360
+    r1, g1, b1 = colorsys.hsv_to_rgb(scomp_h1, scomp_s, scomp_v)
+    r2, g2, b2 = colorsys.hsv_to_rgb(scomp_h2, scomp_s, scomp_v)
+    color1 = hex_conversion(r1, g1, b1)
+    color2 = hex_conversion(r2, g2, b2)
+    return color1, color2
 
 def analogous(ana_h, ana_s, ana_v):
     ana_h1 = ((ana_h + 30) % 360)/360
@@ -57,6 +66,12 @@ cur_label.grid_remove()
 comp_label = ctk.CTkLabel(window, text="", width=25, height=15)
 comp_label.grid_remove()
 
+comp_split_label1 = ctk.CTkLabel(window, text="", width=25, height=15)
+comp_split_label1.grid_remove()
+
+comp_split_label2 = ctk.CTkLabel(window, text="", width=25, height=15)
+comp_split_label2.grid_remove()
+
 ana_label1 = ctk.CTkLabel(window, text="", width=25, height=15)
 ana_label1.grid_remove()
 
@@ -83,6 +98,14 @@ def comp_display(color):
     comp_label.place(x=315, y=510)
     cur_label.configure(fg_color=colorpicker.get())
     cur_label.place(x=290, y=510)
+
+def split_comp_display(color1, color2):
+    cur_label.configure(fg_color=colorpicker.get())
+    cur_label.place(x=277.5, y=510)
+    comp_split_label1.configure(fg_color=color1)
+    comp_split_label1.place(x=302.5, y=510)
+    comp_split_label2.configure(fg_color=color2)
+    comp_split_label2.place(x=327.5, y=510)
 
 def ana_display(color1, color2):
     cur_label.configure(fg_color=colorpicker.get())
@@ -125,8 +148,18 @@ def combobox(choice):
         comp_color = complementary(hue, sat, val)
         comp_display(comp_color)
 
-    elif choice == 'Monochromatic':
-        pass
+    elif choice == 'Split Complementary':
+        cur_label.place_forget()
+        ana_label1.place_forget()
+        ana_label2.place_forget()
+        tria_label1.place_forget()
+        tria_label2.place_forget()
+        tetra_label1.place_forget()
+        tetra_label2.place_forget()
+        tetra_label3.place_forget()
+        comp_label.place_forget()
+        scomp_color1, scomp_color2 = split_complementary(hue, sat, val)
+        split_comp_display(scomp_color1, scomp_color2)
 
     elif choice == 'Analogous':
         cur_label.place_forget()
